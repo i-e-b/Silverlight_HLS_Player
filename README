@@ -1,0 +1,1 @@
+A MediaStreamingSource for playing Apple's HLS format under Silverlight. Currently supports h.264 video and MP3 audio.
