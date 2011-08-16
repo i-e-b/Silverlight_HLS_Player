@@ -53,8 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientBin\HlsPlayer.xap" />
-    <Content Include="HlsPlayerTestPage.aspx" />
-    <Content Include="HlsPlayerTestPage.html" />
+    <Content Include="Default.aspx" />
+    <Content Include="iphone.aspx" />
     <Content Include="Silverlight.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -65,6 +65,20 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="iphone.aspx.cs">
+      <DependentUpon>iphone.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="iphone.aspx.designer.cs">
+      <DependentUpon>iphone.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

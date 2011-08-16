@@ -109,7 +109,7 @@ namespace HCS.StreamSource {
 		/// Returns the chunk that contains the given play-head location.
 		/// Inner seek routine, can also be use to match chunks to play-head times.
 		/// </summary>
-		internal int GetChunkForTime (TimeSpan location) {
+		public int GetChunkForTime (TimeSpan location) {
 			if (Chunks == null || Chunks.Count < 2) return 0;
 
 			TimeSpan now = Chunks[0].ExpectedOffset;
@@ -189,8 +189,7 @@ namespace HCS.StreamSource {
 			return Chunks[offset + SeekChunkIndex].ExpectedOffset;
 		}
 
-
-		internal TimeSpan TimeOfIndex (int index) {
+		public TimeSpan TimeOfIndex (int index) {
 			if (index < 0) index = 0;
 			if (index >= Chunks.Count) index = Chunks.Count - 1;
 

@@ -72,23 +72,83 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ClickAnywhereSlider.xaml.cs">
+      <DependentUpon>ClickAnywhereSlider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Images\SixWayButton.xaml.cs">
+      <DependentUpon>SixWayButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="WMP_Player_Controls.xaml.cs">
+      <DependentUpon>WMP_Player_Controls.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ClickAnywhereSlider.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Images\SixWayButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WMP_Player_Controls.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\back-hover.png" />
+    <Resource Include="Images\back-pressed.png" />
+    <Resource Include="Images\back.png" />
+    <Resource Include="Images\fast-forward-hover.png" />
+    <Resource Include="Images\fast-forward-pressed.png" />
+    <Resource Include="Images\fast-forward.png" />
+    <Resource Include="Images\forward-hover.png" />
+    <Resource Include="Images\forward-pressed.png" />
+    <Resource Include="Images\forward.png" />
+    <Resource Include="Images\fullscreen-hover.png" />
+    <Resource Include="Images\fullscreen-pressed.png" />
+    <Resource Include="Images\fullscreen.png" />
+    <Resource Include="Images\pause-hover.png" />
+    <Resource Include="Images\pause-pressed.png" />
+    <Resource Include="Images\pause.png" />
+    <Resource Include="Images\play-hover.png" />
+    <Resource Include="Images\play-pressed.png" />
+    <Resource Include="Images\play.png" />
+    <Resource Include="Images\rewind-hover.png" />
+    <Resource Include="Images\rewind-pressed.png" />
+    <Resource Include="Images\rewind.png" />
+    <Resource Include="Images\slider-pressed.png" />
+    <Resource Include="Images\slider-volume-pressed.png" />
+    <Resource Include="Images\slider-volume.png" />
+    <Resource Include="Images\slider.png" />
+    <Resource Include="Images\sound-hover.png" />
+    <Resource Include="Images\sound-mute.png" />
+    <Resource Include="Images\sound.png" />
+    <Resource Include="Images\stop-hover.png" />
+    <Resource Include="Images\stop-pressed.png" />
+    <Resource Include="Images\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MediaStreamSource\MediaStreamSource.csproj">
+      <Project>{C32EA3D8-28BD-49A6-9E5D-AE82B1AC139A}</Project>
+      <Name>MediaStreamSource</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

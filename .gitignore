@@ -4,6 +4,10 @@ obj
 *.suo
 *.cache
 /*/_ReSharper.*
+/*/obj
+/*/bin
 /*/*/_ReSharper.*
 /*/*/obj
 /*/*/bin
+/*/*/Obj
+/*/*/Bin
