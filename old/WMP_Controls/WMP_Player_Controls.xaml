@@ -1,0 +1,77 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	xmlns:local="clr-namespace:WMP_Controls"
+	x:Class="WMP_Controls.WMP_Player_Controls"
+	d:DesignWidth="640" d:DesignHeight="480" Height="64" BorderBrush="#FF686868" BorderThickness="0">
+
+	<Grid x:Name="LayoutRoot" Height="64" Margin="0">
+		<Grid.Background>
+			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+				<GradientStop Color="White" Offset="0"/>
+				<GradientStop Color="White" Offset="0.73"/>
+				<GradientStop Color="#FFD8E3E8" Offset="0.74"/>
+				<GradientStop Color="White" Offset="1"/>
+			</LinearGradientBrush>
+		</Grid.Background>
+		<local:SixWayButton x:Name="PlayPause6way" HorizontalAlignment="Left" Margin="8,0,0,4" Width="29"
+		Normal_Inactive="play.png" Hover_Inactive="play-hover.png" Press_Inactive="play-pressed.png"
+		Normal_Active="pause.png" Hover_Active="pause-hover.png" Press_Active="pause-pressed.png"
+		MouseLeftButtonUp="PlayPause6way_MouseLeftButtonUp" Height="28" VerticalAlignment="Bottom" d:LayoutOverrides="VerticalAlignment"/>
+		
+		<local:SixWayButton x:Name="Stop6way" Margin="43,0,0,8" HorizontalAlignment="Left" Width="19" RenderTransformOrigin="0.926,0.536"
+		Normal_Inactive="stop.png" Hover_Inactive="stop-hover.png" Press_Inactive="stop-pressed.png"
+		Normal_Active="stop.png" Hover_Active="stop-hover.png" Press_Active="stop-pressed.png" Height="19"
+        MouseLeftButtonUp="Stop6way_MouseLeftButtonUp" VerticalAlignment="Bottom"/>
+		
+		<local:SixWayButton x:Name="JumpBack6way" Margin="74,0,0,8" HorizontalAlignment="Left" Width="19" RenderTransformOrigin="0.926,0.536"
+			Normal_Inactive="back.png" Hover_Inactive="back-hover.png" Press_Inactive="back-pressed.png"
+			Normal_Active="back.png" Hover_Active="back-hover.png" Press_Active="back-pressed.png" Height="19"
+            MouseLeftButtonUp="JumpBack6way_MouseLeftButtonUp" VerticalAlignment="Bottom"/>
+			
+		<local:SixWayButton x:Name="JumpForward6way" Margin="97,0,0,8" HorizontalAlignment="Left" Width="19" RenderTransformOrigin="0.926,0.536"
+			Normal_Inactive="forward.png" Hover_Inactive="forward-hover.png" Press_Inactive="forward-pressed.png"
+			Normal_Active="forward.png" Hover_Active="forward-hover.png" Press_Active="forward-pressed.png" Height="19"
+            MouseLeftButtonUp="JumpForward6way_MouseLeftButtonUp" VerticalAlignment="Bottom"/>
+			
+			
+		<local:SixWayButton x:Name="Mute6way" Margin="127,0,0,8" HorizontalAlignment="Left" Width="19" RenderTransformOrigin="0.926,0.536"
+			Normal_Inactive="sound.png" Hover_Inactive="sound-hover.png" Press_Inactive="sound-mute.png"
+			Normal_Active="sound-mute.png" Hover_Active="sound-mute.png" Press_Active="sound-hover.png" Height="19"
+            MouseLeftButtonUp="Mute6way_MouseLeftButtonUp" VerticalAlignment="Bottom"/>
+		
+		
+		<Slider x:Name="VolumeSlider" Height="19" Margin="150,0,0,8" VerticalAlignment="Bottom"
+                Maximum="100" SmallChange="1" Value="50" HorizontalAlignment="Left" Width="100"
+                d:LayoutOverrides="HorizontalAlignment" ValueChanged="VolumeSlider_ValueChanged"/>
+        
+        <local:ClickAnywhereSlider
+            x:Name="ChunkSlider" Height="10" Margin="35,19,35,0" VerticalAlignment="Top"
+            Visibility="Visible" />
+		
+		<local:SixWayButton x:Name="Rewind6way" Margin="9,17,0,0" HorizontalAlignment="Left" Width="21" RenderTransformOrigin="0.926,0.536"
+			Normal_Inactive="rewind.png" Hover_Inactive="rewind-hover.png" Press_Inactive="rewind-pressed.png"
+			Normal_Active="rewind.png" Hover_Active="rewind-hover.png" Press_Active="rewind-pressed.png" Height="12"
+            MouseLeftButtonUp="Rewind6way_MouseLeftButtonUp" VerticalAlignment="Top"/>
+		
+		
+		<local:SixWayButton x:Name="FastForward6way" Margin="0,17,9,0" HorizontalAlignment="Right" Width="21" RenderTransformOrigin="0.926,0.536"
+			Normal_Inactive="fast-forward.png" Hover_Inactive="fast-forward-hover.png" Press_Inactive="fast-forward-pressed.png"
+			Normal_Active="fast-forward.png" Hover_Active="fast-forward-hover.png" Press_Active="fast-forward-pressed.png" Height="12"
+            MouseLeftButtonUp="FastForward6way_MouseLeftButtonUp" VerticalAlignment="Top"/>
+
+
+
+        <local:SixWayButton x:Name="Fullscreen" Margin="8,8,8,8" HorizontalAlignment="Right" Width="19" RenderTransformOrigin="0.926,0.536"
+			Normal_Inactive="fullscreen.png" Hover_Inactive="fullscreen-hover.png" Press_Inactive="fullscreen-pressed.png"
+			Normal_Active="fullscreen.png" Hover_Active="fullscreen-hover.png" Press_Active="fullscreen-pressed.png" Height="19"
+            MouseLeftButtonUp="Fullscreen_MouseLeftButtonUp" VerticalAlignment="Bottom"/>
+
+        <Rectangle Stroke="#FF9A9A9A"/>
+		<Rectangle Height="15" VerticalAlignment="Top" Fill="Black"/>
+		<TextBlock x:Name="TimeTextBox" Height="13" HorizontalAlignment="Right" VerticalAlignment="Top" Width="170" FontFamily="Verdana" Foreground="#FF6F9BC7" Text="00:00" TextAlignment="Right" TextWrapping="Wrap" Margin="0,0,8,0"/>
+	</Grid>
+</UserControl>

@@ -1,1 +1,8 @@
-A MediaStreamingSource for playing Apple's HLS format under Silverlight. Currently supports h.264 video and MP3 audio.
+A MediaStreamingSource for playing Apple's HLS format under Silverlight.
+Currently supports h.264 video and MP3 audio.
+Doesn't handle multiple-bitrate files yet.
+
+TODO:
+ - Cleanup and separate the MSS from the demo player
+ - Ensure AAC audio support
+ - Add multiple-bitrate support

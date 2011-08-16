@@ -1,0 +1,164 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ExpressionBlendVersion>3.0.1921.0</ExpressionBlendVersion>
+    <ProjectGuid>{E405B511-95F7-4B7F-9E6F-E7197846A376}</ProjectGuid>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <DefaultClrNameSpace>WMP_Controls</DefaultClrNameSpace>
+    <RootNamespace>WMP_Controls</RootNamespace>
+    <AssemblyName>WMP_Controls</AssemblyName>
+    <ApplicationVersion>1.0.0.*</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <AlwaysCompileMarkupFilesInSeparateDomain>false</AlwaysCompileMarkupFilesInSeparateDomain>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <XapOutputs>true</XapOutputs>
+    <XapFilename>WMP_Controls.xap</XapFilename>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>WMP_Controls.App</SilverlightAppEntry>
+    <CreateTestPage>true</CreateTestPage>
+    <ValidateXaml>true</ValidateXaml>
+    <UsePlatformExtensions>false</UsePlatformExtensions>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <TestPageFileName>TestPage.html</TestPageFileName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\SilverlightPlayer.Web\ClientBin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\SilverlightPlayer.Web\ClientBin\</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SharpZipLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="mscorlib" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Windows.Browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ClickAnywhereSlider.xaml.cs">
+      <DependentUpon>ClickAnywhereSlider.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Images\SixWayButton.xaml.cs">
+      <DependentUpon>SixWayButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="ClickAnywhereSlider.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+    </Page>
+    <Page Include="Images\SixWayButton.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WMP_Player_Controls.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StreamSource\HCS_MediaStreamingSource.cs" />
+    <Compile Include="StreamSource\Helpers\Demuxer\BitSplitter.cs" />
+    <Compile Include="StreamSource\Helpers\Demuxer\GenericMediaFrame.cs" />
+    <Compile Include="StreamSource\Helpers\Demuxer\MpegTS_Demux.cs" />
+    <Compile Include="StreamSource\Helpers\MpegLayer3WaveFormat.cs" />
+    <Compile Include="StreamSource\Helpers\mpegts_demux_buffer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StreamSource\Helpers\StringExtensions.cs" />
+    <Compile Include="StreamSource\Helpers\WaveFormatExtensible.cs" />
+    <Compile Include="StreamSource\PlaylistMgr.cs" />
+    <Compile Include="WMP_Player_Controls.xaml.cs">
+      <DependentUpon>WMP_Player_Controls.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\back-hover.png" />
+    <Resource Include="Images\back-pressed.png" />
+    <Resource Include="Images\back.png" />
+    <Resource Include="Images\fast-forward-hover.png" />
+    <Resource Include="Images\fast-forward-pressed.png" />
+    <Resource Include="Images\fast-forward.png" />
+    <Resource Include="Images\forward-hover.png" />
+    <Resource Include="Images\forward-pressed.png" />
+    <Resource Include="Images\forward.png" />
+    <Resource Include="Images\pause-hover.png" />
+    <Resource Include="Images\pause-pressed.png" />
+    <Resource Include="Images\pause.png" />
+    <Resource Include="Images\play-hover.png" />
+    <Resource Include="Images\play-pressed.png" />
+    <Resource Include="Images\play.png" />
+    <Resource Include="Images\rewind-hover.png" />
+    <Resource Include="Images\rewind-pressed.png" />
+    <Resource Include="Images\rewind.png" />
+    <Resource Include="Images\slider-pressed.png" />
+    <Resource Include="Images\slider-volume-pressed.png" />
+    <Resource Include="Images\sound-hover.png" />
+    <Resource Include="Images\sound-mute.png" />
+    <Resource Include="Images\sound.png" />
+    <Resource Include="Images\stop-hover.png" />
+    <Resource Include="Images\stop-pressed.png" />
+    <Resource Include="Images\stop.png" />
+    <Resource Include="Properties\AppManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\fullscreen-hover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\fullscreen-pressed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\fullscreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\slider-volume.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\slider.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight\V3.0\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
