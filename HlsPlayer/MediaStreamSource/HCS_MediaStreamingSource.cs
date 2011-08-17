@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Text;
 using System.Windows.Threading;
 
 namespace HCS.StreamSource {
@@ -38,16 +29,15 @@ namespace HCS.StreamSource {
 			playlist = Playlist;
 			DemuxBuffer = new mpegts_demux_buffer(Playlist);
 
-			DemuxBuffer.AudioSamplesAvailable += new EventHandler(DemuxBuffer_AudioSamplesAvailable);
-			DemuxBuffer.VideoSamplesAvailable += new EventHandler(DemuxBuffer_VideoSamplesAvailable);
+			DemuxBuffer.AudioSamplesAvailable += DemuxBuffer_AudioSamplesAvailable;
+			DemuxBuffer.VideoSamplesAvailable += DemuxBuffer_VideoSamplesAvailable;
 
 			StartTimer();
 		}
 
 		protected void StartTimer () {
-			timer = new DispatcherTimer();
-			timer.Interval = TimeSpan.FromSeconds(0.5) ;
-			timer.Tick += new EventHandler(timer_Tick);
+			timer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(0.5)};
+			timer.Tick += timer_Tick;
 			timer.Start();
 		}
 
@@ -80,10 +70,10 @@ namespace HCS.StreamSource {
 			TimeSpan when = TimeSpan.FromTicks((long)frame.FramePresentationTime);
 
 			var flags = new Dictionary<MediaSampleAttributeKeys, string>();
-			MemoryStream ms = new MemoryStream(frame.FrameData);
+			var ms = new MemoryStream(frame.FrameData);
 
 			try {
-				MediaStreamSample samp = new MediaStreamSample(
+				var samp = new MediaStreamSample(
 						this.videoStreamDescription,
 						ms, 0, frame.FrameData.Length,
 						frame.FramePresentationTime,
@@ -109,9 +99,9 @@ namespace HCS.StreamSource {
 			}
 
 			var flags = new Dictionary<MediaSampleAttributeKeys, string>();
-			MemoryStream ms = new MemoryStream(frame.FrameData);
+			var ms = new MemoryStream(frame.FrameData);
 			try {
-				MediaStreamSample samp = new MediaStreamSample(
+				var samp = new MediaStreamSample(
 						this.audioStreamDescription,
 						ms, 0, frame.FrameData.Length,
 						frame.FramePresentationTime,
@@ -152,7 +142,7 @@ namespace HCS.StreamSource {
 			MediaStreamDescription msd = this.videoStreamDescription;
 			if (mediaStreamType == MediaStreamType.Audio) msd = this.audioStreamDescription;
 			try {
-				MediaStreamSample samp = new MediaStreamSample(msd, null, 0, 0, 0, flags);
+				var samp = new MediaStreamSample(msd, null, 0, 0, 0, flags);
 				ReportGetSampleCompleted(samp);
 			} catch { }
 		}
@@ -172,11 +162,11 @@ namespace HCS.StreamSource {
 		/// Adds H264 playing info.
 		/// </summary>
 		protected override void OpenMediaAsync () {
-			Dictionary<MediaSourceAttributesKeys, string> mediaSourceAttributes = new Dictionary<MediaSourceAttributesKeys, string>();
+			var mediaSourceAttributes = new Dictionary<MediaSourceAttributesKeys, string>();
 			Dictionary<MediaStreamAttributeKeys, string> videoStreamAttributes = GetVideoSettings();
 			Dictionary<MediaStreamAttributeKeys, string> audioStreamAttributes = GetAudioSettings();
 
-			List<MediaStreamDescription> mediaStreamDescriptions = new List<MediaStreamDescription>();
+			var mediaStreamDescriptions = new List<MediaStreamDescription>();
 
 			this.videoStreamDescription = new MediaStreamDescription(MediaStreamType.Video, videoStreamAttributes);
 			mediaStreamDescriptions.Add(this.videoStreamDescription);
@@ -195,7 +185,7 @@ namespace HCS.StreamSource {
 		/// TODO: get Codec data for framerate
 		/// </summary>
 		protected Dictionary<MediaStreamAttributeKeys, string> GetVideoSettings () {
-			Dictionary<MediaStreamAttributeKeys, string> mediaStreamAttributes = new Dictionary<MediaStreamAttributeKeys, string>();
+			var mediaStreamAttributes = new Dictionary<MediaStreamAttributeKeys, string>();
 			mediaStreamAttributes[MediaStreamAttributeKeys.VideoFourCC] = "H264";
 
 			// 'iPhone' video is native at 480x320.
@@ -209,13 +199,12 @@ namespace HCS.StreamSource {
 		/// Build description for Audio stream.
 		/// </summary>
 		protected Dictionary<MediaStreamAttributeKeys, string> GetAudioSettings () {
-			Dictionary<MediaStreamAttributeKeys, string> mediaStreamAttributes = new Dictionary<MediaStreamAttributeKeys, string>();
+			var mediaStreamAttributes = new Dictionary<MediaStreamAttributeKeys, string>();
 
 			// Initialize the Mp3 data structures used by the Media pipeline with state from the first frame.
 			// These are all defaults for the HCS system. reading these in properly is a total ass-pain.
-			WaveFormatExtensible wfx = new WaveFormatExtensible();
-			this.MpegLayer3WaveFormat = new MpegLayer3WaveFormat();
-			this.MpegLayer3WaveFormat.WaveFormatExtensible = wfx;
+			var wfx = new WaveFormatExtensible();
+			this.MpegLayer3WaveFormat = new MpegLayer3WaveFormat {WaveFormatExtensible = wfx};
 
 			this.MpegLayer3WaveFormat.WaveFormatExtensible.FormatTag = 85;
 			this.MpegLayer3WaveFormat.WaveFormatExtensible.Channels = 1;
@@ -231,7 +220,7 @@ namespace HCS.StreamSource {
 			this.MpegLayer3WaveFormat.BlockSize = 312;
 			this.MpegLayer3WaveFormat.CodecDelay = 0;
 
-			mediaStreamAttributes[MediaStreamAttributeKeys.CodecPrivateData] = this.MpegLayer3WaveFormat.ToHexString();
+			mediaStreamAttributes[MediaStreamAttributeKeys.CodecPrivateData] = MpegLayer3WaveFormat.ToHexString();
 
 			return mediaStreamAttributes;
 		}

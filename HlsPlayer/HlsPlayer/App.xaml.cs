@@ -13,7 +13,30 @@ namespace HlsPlayer {
 		}
 
 		private void Application_Startup (object sender, StartupEventArgs e) {
-			this.RootVisual = new MainPage();
+			var p = new MainPage();
+			this.RootVisual = p;
+
+			// Get around some weird scaling issues:
+			p.Height = this.Host.Content.ActualHeight;
+			p.Width = this.Host.Content.ActualWidth;
+
+			// Display the custom initialization parameters.
+			foreach (String key in e.InitParams.Keys) {
+
+				switch (key) {
+					case "mediaURL":
+						p.MediaURL = e.InitParams[key];
+						break;
+
+					case "startTime":
+						p.PositionString = e.InitParams[key];
+						break;
+
+					default: continue;
+				}
+			}
+
+			p.Play();
 		}
 
 		private void Application_Exit (object sender, EventArgs e) {

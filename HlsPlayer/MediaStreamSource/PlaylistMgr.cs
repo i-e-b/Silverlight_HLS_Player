@@ -308,12 +308,14 @@ namespace HCS.StreamSource {
 					if (header != "#EXTM3U") throw new Exception("Invalid playlist format: header");
 					string[] duration = (sr.ReadLine()??"").Split(new[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
 					double seconds;
-					if ((duration.Length != 2)
+					/*if ((duration.Length != 2)
 						|| (duration[0] != "#EXT-X-TARGETDURATION")
 						|| (!double.TryParse(duration[1], out seconds))
 						) throw new Exception("Invalid playlist format: target duration");
 
 					if (seconds < 1.0) throw new Exception("Invalid playlist: chunks too short (must be at least one second)");
+					*/
+					seconds = 5.0; //todo: check whole file for duration -- some playlists are putting it at the end.
 
 					ChunkDuration = TimeSpan.FromSeconds(seconds);
 					if (timer == null) StartTimer(); // we now have enough info to start the timer
@@ -330,8 +332,8 @@ namespace HCS.StreamSource {
 							try {// I'm using Apple's "title" part to give an accurate duration (which helps with seeking in very long videos)
 								secs = double.Parse(line.Substring(line.IndexOf(',') + 1));
 							} catch {drop(); }
-							if (secs > 0.0 && secs < (seconds * 2)) total_seconds += secs; // if the encoder's figure seems reasonable
-							else total_seconds += seconds; // add default
+							/*if (secs > 0.0 && secs < (seconds * 2))*/ total_seconds += secs; // if the encoder's figure seems reasonable
+							//else total_seconds += seconds; // add default
 							continue;
 						}
 						if (line.StartsWith("#EXT-X-ENDLIST")) {

@@ -67,7 +67,7 @@
 			<li><a href="?plst=<%= Playlist2 %>">Demo 2</a> </li>
 		</ul>
 		<div id="silverlightControlHost">
-			<object data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="100%" height="100%">
+			<object data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="512px" height="300px">
 				<param name="source" value="ClientBin/HlsPlayer.xap" />
 				<param name="onError" value="onSilverlightError" />
 				<param name="background" value="white" />

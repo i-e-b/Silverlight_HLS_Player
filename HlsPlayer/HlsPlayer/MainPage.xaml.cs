@@ -7,14 +7,14 @@ using HCS.StreamSource;
 namespace HlsPlayer {
 	public partial class MainPage : UserControl {
 
-		private bool NeedToReset = false;
-		private bool TimerWorking = false;
-		private bool Ready = false;
+		private bool NeedToReset;
+		private bool TimerWorking;
+		private bool Ready;
 		private TimeSpan NextSeekLocation = TimeSpan.Zero;
-		private int? MaybeStartTime = null;
+		private int? MaybeStartTime;
 		protected PlaylistMgr Playlist;
 		protected HCS_MediaStreamingSource PlayerStreamSource;
-		private System.Windows.Threading.DispatcherTimer timer = null;
+		private System.Windows.Threading.DispatcherTimer timer;
 
 		public string MediaURL {
 			get {
@@ -29,9 +29,9 @@ namespace HlsPlayer {
 		/// Prepare and start a new playlist, hooked up to the ready event.
 		/// </summary>
 		private void SetPlaylist (string value) {
-			Playlist = new PlaylistMgr(value /*"http://www.arqiva.twofourstaging.net/hls/index.m3u8.gz"*/);
+			Playlist = new PlaylistMgr(value);
 
-			Playlist.PlaylistReady += new EventHandler(Playlist_PlaylistReady);
+			Playlist.PlaylistReady += Playlist_PlaylistReady;
 			Playlist.StartReading();
 		}
 		/// <summary>
@@ -88,30 +88,29 @@ namespace HlsPlayer {
 			InitializeComponent();
 
 			//ScalePlayer();
-			this.SizeChanged += new SizeChangedEventHandler(MainPage_SizeChanged);
-			this.LayoutUpdated += new EventHandler(MainPage_LayoutUpdated);
+			SizeChanged += MainPage_SizeChanged;
+			LayoutUpdated += MainPage_LayoutUpdated;
 
-			MediaControls.TogglePlay += new EventHandler(MediaControls_TogglePlay);
-			MediaControls.StopVideo += new EventHandler(MediaControls_StopVideo);
-			MediaControls.JumpBack += new EventHandler(MediaControls_JumpBack);
-			MediaControls.JumpForward += new EventHandler(MediaControls_JumpForward);
-			MediaControls.VolumeChanged += new EventHandler(MediaControls_VolumeChanged);
-			MediaControls.PositionMarkerChanged+=new EventHandler<WMP_Player_Controls.TimeSpanEvent>(MediaControls_PositionMarkerChanged);
-			MediaControls.FastForward += new EventHandler(MediaControls_FastForward);
-			MediaControls.Rewind += new EventHandler(MediaControls_Rewind);
-			MediaControls.GoFullscreen += new EventHandler(MediaControls_GoFullscreen);
+			MediaControls.TogglePlay += MediaControls_TogglePlay;
+			MediaControls.StopVideo += MediaControls_StopVideo;
+			MediaControls.JumpBack += MediaControls_JumpBack;
+			MediaControls.JumpForward += MediaControls_JumpForward;
+			MediaControls.VolumeChanged += MediaControls_VolumeChanged;
+			MediaControls.PositionMarkerChanged+=MediaControls_PositionMarkerChanged;
+			MediaControls.FastForward += MediaControls_FastForward;
+			MediaControls.Rewind += MediaControls_Rewind;
+			MediaControls.GoFullscreen += MediaControls_GoFullscreen;
 
-			MediaPlayer.CurrentStateChanged += new RoutedEventHandler(MediaPlayer_CurrentStateChanged);
-			MediaPlayer.MarkerReached += new TimelineMarkerRoutedEventHandler(MediaPlayer_MarkerReached);
-			MediaPlayer.MediaEnded += new RoutedEventHandler(MediaPlayer_MediaEnded);
-			MediaPlayer.MediaFailed += new EventHandler<ExceptionRoutedEventArgs>(MediaPlayer_MediaFailed);
+			MediaPlayer.CurrentStateChanged += MediaPlayer_CurrentStateChanged;
+			MediaPlayer.MarkerReached += MediaPlayer_MarkerReached;
+			MediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
+			MediaPlayer.MediaFailed += MediaPlayer_MediaFailed;
 
-			this.SizeChanged+=new SizeChangedEventHandler(MainPage_SizeChanged);
+			//SizeChanged+=MainPage_SizeChanged;
 
 			// Start a periodic timer to keep the controls up to date.
-			timer = new System.Windows.Threading.DispatcherTimer();
-			timer.Interval = TimeSpan.FromSeconds(0.5);
-			timer.Tick += new EventHandler(timer_Tick);
+			timer = new System.Windows.Threading.DispatcherTimer {Interval = TimeSpan.FromSeconds(0.5)};
+			timer.Tick += timer_Tick;
 			timer.Start();
 		}
 
@@ -192,7 +191,7 @@ namespace HlsPlayer {
 				if (NeedToReset) {
 					MediaPlayer.Pause(); // must do this!
 					Playlist.Seek(NextSeekLocation);
-					if (PlayerStreamSource != null) PlayerStreamSource.Dispose();
+					PlayerStreamSource.Dispose();
 					PlayerStreamSource = new HCS_MediaStreamingSource(Playlist); // this means all new buffers
 					MediaPlayer.SetSource(PlayerStreamSource);
 					MediaPlayer.Position = NextSeekLocation;
