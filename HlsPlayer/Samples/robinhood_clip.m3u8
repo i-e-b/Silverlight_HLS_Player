@@ -1,0 +1,9 @@
+#EXTM3U
+#EXT-X-STREAM-INF:PROGRAM-ID=1, BANDWIDTH=181674
+http://ispss.istreamplanet.com/iphone/robinhood_Edge.m3u8
+#EXT-X-STREAM-INF:PROGRAM-ID=1, BANDWIDTH=448577
+http://ispss.istreamplanet.com/iphone/robinhood_3GLow.m3u8
+#EXT-X-STREAM-INF:PROGRAM-ID=1, BANDWIDTH=798577
+http://ispss.istreamplanet.com/iphone/robinhood_3Ghi.m3u8
+#EXT-X-STREAM-INF:PROGRAM-ID=1, BANDWIDTH=1598577
+http://ispss.istreamplanet.com/iphone/robinhood_wifi.m3u8
