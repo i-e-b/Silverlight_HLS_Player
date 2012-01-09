@@ -9,8 +9,8 @@
     <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HlsPlayer</RootNamespace>
-    <AssemblyName>HlsPlayer</AssemblyName>
+    <RootNamespace>TestPlayer</RootNamespace>
+    <AssemblyName>TestPlayer</AssemblyName>
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
@@ -19,9 +19,9 @@
     </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>HlsPlayer.xap</XapFilename>
+    <XapFilename>TestPlayer.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
-    <SilverlightAppEntry>HlsPlayer.App</SilverlightAppEntry>
+    <SilverlightAppEntry>TestPlayer.App</SilverlightAppEntry>
     <TestPageFileName>HlsPlayerTestPage.html</TestPageFileName>
     <CreateTestPage>true</CreateTestPage>
     <ValidateXaml>true</ValidateXaml>
@@ -147,9 +147,9 @@
     <Resource Include="Images\stop.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MediaStreamSource\MediaStreamSource.csproj">
+    <ProjectReference Include="..\MediaStreamSource\HlsMediaStreamSource.csproj">
       <Project>{C32EA3D8-28BD-49A6-9E5D-AE82B1AC139A}</Project>
-      <Name>MediaStreamSource</Name>
+      <Name>HlsMediaStreamSource</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />

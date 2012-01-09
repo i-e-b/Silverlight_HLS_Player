@@ -1,11 +1,11 @@
 ﻿<UserControl
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:HlsPlayer="clr-namespace:HlsPlayer" x:Class="HlsPlayer.MainPage"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:HlsPlayer="clr-namespace:HlsPlayer" xmlns:TestPlayer="clr-namespace:TestPlayer" x:Class="TestPlayer.MainPage"
 	Width="460" Height="322" mc:Ignorable="d" Background="Black">
     
         <Grid x:Name="LayoutRoot" Background="Black">
 
             <MediaElement x:Name="MediaPlayer" Stretch="Uniform" Height="259" VerticalAlignment="Top"></MediaElement>
-            <HlsPlayer:WMP_Player_Controls x:Name="MediaControls" VerticalAlignment="Bottom"/>
+            <TestPlayer:WMP_Player_Controls x:Name="MediaControls" VerticalAlignment="Bottom"/>
         </Grid>
 </UserControl>

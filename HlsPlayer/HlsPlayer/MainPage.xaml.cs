@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using HCS.StreamSource;
 
-namespace HlsPlayer {
+namespace TestPlayer {
 	public partial class MainPage : UserControl {
 
 		private bool NeedToReset;

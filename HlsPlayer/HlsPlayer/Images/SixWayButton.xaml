@@ -4,7 +4,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
-	x:Class="HlsPlayer.Images.SixWayButton"
+	x:Class="TestPlayer.Images.SixWayButton"
 	d:DesignWidth="29" d:DesignHeight="28" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" MouseLeftButtonDown="UserControl_MouseLeftButtonDown" MouseLeftButtonUp="UserControl_MouseLeftButtonUp">
 
 	<Grid x:Name="LayoutRoot">

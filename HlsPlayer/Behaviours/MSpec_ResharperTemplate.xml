@@ -1,0 +1,16 @@
+<TemplatesExport family="Live Templates">
+  <Template uid="49087f64-ed2b-4664-885d-a4941edd03d9" shortcut="mspec" description="Template MSpec concerns" text="#pragma warning disable 169&#xD;&#xA;using Machine.Specifications;&#xD;&#xA;&#xD;&#xA;namespace $scenario$ {&#xD;&#xA;	class When_$doing_something$ : with.$a_context$ {&#xD;&#xA;		Because of = () =&gt; { result = null; };&#xD;&#xA;&#xD;&#xA;		It should_do_something = () =&gt; result.ShouldNotBeNull();&#xD;&#xA;	}&#xD;&#xA;&#xD;&#xA;	#region contexts&#xD;&#xA;	namespace with {&#xD;&#xA;		[Subject(&quot;With $a_context$&quot;)]&#xD;&#xA;		public abstract class $a_context$ : /*Database*/ContextAndResult&lt;$subject_type$, $result_type$&gt; {&#xD;&#xA;&#xD;&#xA;			Establish context = () =&gt; {&#xD;&#xA;				subject = new $subject_type$();&#xD;&#xA;			}&#xD;&#xA;		}&#xD;&#xA;	}&#xD;&#xA;	#endregion&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;#pragma warning restore 169" reformat="False" shortenQualifiedReferences="False">
+    <Context>
+      <CSharpContext context="Everywhere" minimumLanguageVersion="2.0" />
+    </Context>
+    <Categories />
+    <Variables>
+      <Variable name="scenario" expression="getFileNameWithoutExtension()" initialRange="0" />
+      <Variable name="doing_something" expression="" initialRange="0" />
+      <Variable name="a_context" expression="" initialRange="0" />
+      <Variable name="subject_type" expression="complete()" initialRange="0" />
+      <Variable name="result_type" expression="" initialRange="0" />
+    </Variables>
+    <CustomProperties />
+  </Template>
+</TemplatesExport>

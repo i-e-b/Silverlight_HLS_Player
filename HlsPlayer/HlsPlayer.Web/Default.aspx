@@ -68,7 +68,7 @@
 		</ul>
 		<div id="silverlightControlHost">
 			<object data="data:application/x-silverlight-2," type="application/x-silverlight-2" width="512px" height="300px">
-				<param name="source" value="ClientBin/HlsPlayer.xap" />
+				<param name="source" value="ClientBin/TestPlayer.xap" />
 				<param name="onError" value="onSilverlightError" />
 				<param name="background" value="white" />
 				<param name="minRuntimeVersion" value="4.0.50826.0" />

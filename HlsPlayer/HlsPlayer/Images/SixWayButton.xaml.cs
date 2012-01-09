@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
-namespace HlsPlayer.Images {
+namespace TestPlayer.Images {
 	public partial class SixWayButton : UserControl {
 
 		private BitmapImage[] imgs = new BitmapImage[6];

@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using HCS.StreamSource;
 
-namespace HlsPlayer {
+namespace TestPlayer {
 	public partial class ClickAnywhereSlider : UserControl {
 
 		public TimeSpan ChunkDuration { get; set; }

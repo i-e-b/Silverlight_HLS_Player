@@ -3,7 +3,6 @@ using System.Net;
 using System.Windows.Threading;
 using System.Collections.Generic;
 using System.IO;
-using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 
 namespace HCS.StreamSource {
 
@@ -19,7 +18,7 @@ namespace HCS.StreamSource {
 	/// <summary>
 	/// Handles keeping the playlist up-to-date
 	/// </summary>
-	public class PlaylistMgr: IDisposable {
+	public class PlaylistMgr : IDisposable {
 		protected string PlaylistUrl;
 		protected List<ChunkDetail> Chunks;
 		protected DispatcherTimer timer;
@@ -52,16 +51,6 @@ namespace HCS.StreamSource {
 		/// Duration of a single chunk.
 		/// </summary>
 		public TimeSpan ChunkDuration { get; protected set; }
-
-		/// <summary>
-		/// Is the selected playlist file compressed?
-		/// </summary>
-		public bool IsCompressedPlaylist {
-			get {
-				if (String.IsNullOrEmpty(PlaylistUrl)) return false;
-				return PlaylistUrl.ToUpper().EndsWith(".GZ");
-			}
-		}
 
 		/// <summary>
 		/// Number of chunks in the seek space
@@ -243,7 +232,7 @@ namespace HCS.StreamSource {
 		}
 
 		protected void StartTimer () {
-			timer = new DispatcherTimer{Interval = TimeSpan.FromTicks(ChunkDuration.Ticks * 2)};
+			timer = new DispatcherTimer { Interval = TimeSpan.FromTicks(ChunkDuration.Ticks * 2) };
 			timer.Tick += ReadPlaylistAsync;
 			timer.Start();
 		}
@@ -260,7 +249,7 @@ namespace HCS.StreamSource {
 			System.Threading.ThreadPool.QueueUserWorkItem(ReadPlaylist);
 		}
 
-		private void drop() {}
+		private void drop () { }
 
 		private void ReadPlaylist (object source) {
 			if (String.IsNullOrEmpty(PlaylistUrl)) throw new Exception("Empty playlist url");
@@ -291,76 +280,60 @@ namespace HCS.StreamSource {
 		}
 
 		private void ParseHeaderFromWebRequest (OpenReadCompletedEventArgs e, List<ChunkDetail> new_chunks) {
-			StreamReader sr = null;
+			StreamReader sr;
 			using (var b_sr = new StreamReader(e.Result)) {
-				try {
-					if (IsCompressedPlaylist) {
-						var x = new InflaterInputStream(b_sr.BaseStream);
-						sr = new StreamReader(x);
+				sr = b_sr;
+
+				string base_url = PlaylistUrl.Substring(0, PlaylistUrl.LastIndexOf('/'));
+				if (!base_url.EndsWith("/")) base_url += "/";
+
+				string header = sr.ReadLine();
+				if (header != "#EXTM3U") throw new Exception("Invalid playlist format: header");
+				string[] duration = (sr.ReadLine() ?? "").Split(new[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
+				double seconds;
+				if ((duration.Length != 2)
+					|| (duration[0] != "#EXT-X-TARGETDURATION")
+					|| (!double.TryParse(duration[1], out seconds))
+					) throw new Exception("Invalid playlist format: target duration");
+
+				if (seconds < 1.0) seconds = 5.0;
+
+				ChunkDuration = TimeSpan.FromSeconds(seconds);
+				if (timer == null) StartTimer(); // we now have enough info to start the timer
+
+				double total_seconds = 0.0; // sum of chunk durations, regardless of target time.
+
+				do {
+					string line = sr.ReadLine();
+
+					if (line == null) break; // no more lines
+					if (line.Length < 2) continue; // blank
+					if (line.StartsWith("#EXTINF:")) { // this is the 'next video' marker.
+						double secs = 0.0;
+						try {// I'm using Apple's "title" part to give an accurate duration (which helps with seeking in very long videos)
+							secs = double.Parse(line.Substring(line.IndexOf(',') + 1));
+						} catch { drop(); }
+						/*if (secs > 0.0 && secs < (seconds * 2))*/
+						total_seconds += secs; // if the encoder's figure seems reasonable
+						//else total_seconds += seconds; // add default
+						continue;
+					}
+					if (line.StartsWith("#EXT-X-ENDLIST")) {
+						//timer.Stop(); // this is a complete Playlist -- not live, so don't need periodic updates
+						isLive = false;
+						break;
+					}
+					if (line.StartsWith("#")) {
+						// Some other extension line
+						continue;
+					}
+
+					if (line.StartsWith("http://")) {
+						new_chunks.Add(new ChunkDetail(line, TimeSpan.FromSeconds(total_seconds)));
 					} else {
-						sr = b_sr;
+						new_chunks.Add(new ChunkDetail(base_url + line, TimeSpan.FromSeconds(total_seconds)));
 					}
-
-					string base_url = PlaylistUrl.Substring(0, PlaylistUrl.LastIndexOf('/'));
-					if (!base_url.EndsWith("/")) base_url += "/";
-
-					string header = sr.ReadLine();
-					if (header != "#EXTM3U") throw new Exception("Invalid playlist format: header");
-					string[] duration = (sr.ReadLine()??"").Split(new[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
-					double seconds;
-					/*if ((duration.Length != 2)
-						|| (duration[0] != "#EXT-X-TARGETDURATION")
-						|| (!double.TryParse(duration[1], out seconds))
-						) throw new Exception("Invalid playlist format: target duration");
-
-					if (seconds < 1.0) throw new Exception("Invalid playlist: chunks too short (must be at least one second)");
-					*/
-					seconds = 5.0; //todo: check whole file for duration -- some playlists are putting it at the end.
-
-					ChunkDuration = TimeSpan.FromSeconds(seconds);
-					if (timer == null) StartTimer(); // we now have enough info to start the timer
-
-					double total_seconds = 0.0; // sum of chunk durations, regardless of target time.
-
-					do {
-						string line = sr.ReadLine();
-
-						if (line == null) break; // no more lines
-						if (line.Length < 2) continue; // blank
-						if (line.StartsWith("#EXTINF:")) { // this is the 'next video' marker.
-							double secs = 0.0;
-							try {// I'm using Apple's "title" part to give an accurate duration (which helps with seeking in very long videos)
-								secs = double.Parse(line.Substring(line.IndexOf(',') + 1));
-							} catch {drop(); }
-							/*if (secs > 0.0 && secs < (seconds * 2))*/ total_seconds += secs; // if the encoder's figure seems reasonable
-							//else total_seconds += seconds; // add default
-							continue;
-						}
-						if (line.StartsWith("#EXT-X-ENDLIST")) {
-							//timer.Stop(); // this is a complete Playlist -- not live, so don't need periodic updates
-							isLive = false;
-							break;
-						}
-						if (line.StartsWith("#")) {
-							// Some other extension line
-							continue;
-						}
-
-						if (line.StartsWith("http://")) {
-							new_chunks.Add(new ChunkDetail(line, TimeSpan.FromSeconds(total_seconds)));
-						} else {
-							new_chunks.Add(new ChunkDetail(base_url + line, TimeSpan.FromSeconds(total_seconds)));
-						}
-					} while (true);
-				} finally {
-					if (IsCompressedPlaylist && sr != null) {
-						var x = sr.BaseStream as InflaterInputStream;
-						if (x != null) {
-							x.Close();
-							x.Dispose();
-						}
-					}
-				}
+				} while (true);
 			}
 		}
 
@@ -375,15 +348,15 @@ namespace HCS.StreamSource {
 				wc.CancelAsync();
 			}
 		}
-/*
-		/// <summary>
-		/// Recommended time to buffer.
-		/// </summary>
-		public TimeSpan BufferTime () {
-			double rec = Math.Max(15.0, ChunkDuration.TotalSeconds * 3.0);
-			rec = Math.Min(30.0, rec);
-			return TimeSpan.FromSeconds(rec);
-		}
-		*/
+		/*
+				/// <summary>
+				/// Recommended time to buffer.
+				/// </summary>
+				public TimeSpan BufferTime () {
+					double rec = Math.Max(15.0, ChunkDuration.TotalSeconds * 3.0);
+					rec = Math.Min(30.0, rec);
+					return TimeSpan.FromSeconds(rec);
+				}
+				*/
 	}
 }

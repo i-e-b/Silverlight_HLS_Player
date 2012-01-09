@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using HCS.StreamSource;
 
-namespace HlsPlayer {
+namespace TestPlayer {
 	public partial class WMP_Player_Controls : UserControl {
 		public class TimeSpanEvent : EventArgs {
 			public TimeSpan Time { get; set; }

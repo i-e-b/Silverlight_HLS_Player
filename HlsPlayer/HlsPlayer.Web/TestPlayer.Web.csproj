@@ -10,8 +10,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HlsPlayer.Web</RootNamespace>
-    <AssemblyName>HlsPlayer.Web</AssemblyName>
+    <RootNamespace>TestPlayer.Web</RootNamespace>
+    <AssemblyName>TestPlayer.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <SilverlightApplicationList>{88BDF93D-8634-40E5-BBCB-B1736777E665}|..\HlsPlayer\HlsPlayer.csproj|ClientBin|False</SilverlightApplicationList>
@@ -52,7 +52,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClientBin\HlsPlayer.xap" />
+    <Content Include="ClientBin\TestPlayer.xap" />
     <Content Include="Default.aspx" />
     <Content Include="iphone.aspx" />
     <Content Include="Silverlight.js" />

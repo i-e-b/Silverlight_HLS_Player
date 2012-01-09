@@ -3,7 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	mc:Ignorable="d" xmlns:HlsPlayer="clr-namespace:HlsPlayer" xmlns:local="clr-namespace:HlsPlayer.Images" x:Class="HlsPlayer.WMP_Player_Controls"
+	mc:Ignorable="d" xmlns:HlsPlayer="clr-namespace:HlsPlayer" xmlns:TestPlayer="clr-namespace:TestPlayer" xmlns:local="clr-namespace:TestPlayer.Images" x:Class="TestPlayer.WMP_Player_Controls"
 	d:DesignWidth="640" d:DesignHeight="480" Height="64" BorderBrush="#FF686868" BorderThickness="0">
 
 	<Grid x:Name="LayoutRoot" Height="64" Margin="0">
@@ -46,7 +46,7 @@
                 Maximum="100" SmallChange="1" Value="50" HorizontalAlignment="Left" Width="100"
                 d:LayoutOverrides="HorizontalAlignment" ValueChanged="VolumeSlider_ValueChanged"/>
         
-        <HlsPlayer:ClickAnywhereSlider
+        <TestPlayer:ClickAnywhereSlider
             x:Name="ChunkSlider" Height="10" Margin="35,19,35,0" VerticalAlignment="Top"
             Visibility="Visible" />
 		
