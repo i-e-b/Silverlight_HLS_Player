@@ -64,6 +64,7 @@
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Helpers\WaveFormatExtensible.cs" />
     <Compile Include="PlaylistMgr.cs" />
+    <Compile Include="Playlists\ITextDownloader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
