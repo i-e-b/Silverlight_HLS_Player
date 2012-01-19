@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Machine.Specifications">
-      <HintPath>..\Dependencies\Machine.Specifications.dll</HintPath>
+    <Reference Include="Machine.Specifications, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Machine.Specifications.0.5.2.0\lib\Machine.Specifications.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\Dependencies\Moq.dll</HintPath>
@@ -54,12 +55,16 @@
     <Compile Include="..\MediaStreamSource\Playlists\ITextDownloader.cs">
       <Link>LINKED\ITextDownloader.cs</Link>
     </Compile>
+    <Compile Include="Fakes\single_bitrate_playlist_textdownloader.cs" />
     <Compile Include="Helpers\MSpecWrappers.cs" />
     <Compile Include="PlaylistLoading.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="LINKED\_ReadMe_.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

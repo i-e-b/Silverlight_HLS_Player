@@ -3,6 +3,7 @@ obj
 *.user
 *.suo
 *.cache
+/*/packages
 /*/_ReSharper.*
 /*/obj
 /*/bin
