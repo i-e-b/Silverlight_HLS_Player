@@ -55,7 +55,7 @@
     <Compile Include="..\MediaStreamSource\Playlists\ITextDownloader.cs">
       <Link>LINKED\ITextDownloader.cs</Link>
     </Compile>
-    <Compile Include="Fakes\single_bitrate_playlist_textdownloader.cs" />
+    <Compile Include="Fakes\playlist_textdownloader.cs" />
     <Compile Include="Helpers\MSpecWrappers.cs" />
     <Compile Include="PlaylistLoading.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

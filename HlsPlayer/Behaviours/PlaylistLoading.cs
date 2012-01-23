@@ -24,13 +24,13 @@ namespace PlaylistLoading {
 	namespace with {
 		[Subject("with a uri to a single bitrate playlist")]
 		public abstract class uri_to_a_single_bitrate_playlist : ContextOf<PlaylistReader> {
-			public static single_bitrate_playlist_textdownloader downloader;
+			public static playlist_textdownloader downloader;
 			public static Uri target;
 
 			Establish context = () =>
 			{
-				downloader = new single_bitrate_playlist_textdownloader();
-				target = new Uri("http://www.example.com/playlist.m3u8");
+				downloader = new playlist_textdownloader();
+				target = downloader.WifiUri;
 				subject = new PlaylistReader(downloader);
 			};
 		}
